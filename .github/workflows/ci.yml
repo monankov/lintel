@@ -17,7 +17,7 @@ jobs:
       contents: read
       id-token: write   # NuGet Trusted Publishing: GitHub issues a token that nuget.org exchanges for a temporary API key
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 0   # MinVer needs tags and history
 

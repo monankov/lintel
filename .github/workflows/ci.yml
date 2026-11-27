@@ -39,12 +39,15 @@ jobs:
         with:
           java-version: 21
           distribution: zulu
-      - uses: SonarSource/sonarqube-auth-action@v1.2   # exports a temporary SONAR_TOKEN for the next steps
+      - uses: SonarSource/sonarqube-auth-action@v1.2   # a temporary token, valid for 30 minutes
+        id: sonar-auth
         if: env.SONAR_ANALYSIS == 'true'
       - name: SonarQube Cloud - begin analysis
         if: env.SONAR_ANALYSIS == 'true'
         run: >
           dotnet sonarscanner begin /k:"monankov_lintel" /o:"monankov"
+          /d:sonar.token="${{ steps.sonar-auth.outputs.sonar-token }}"
+          /d:sonar.scanner.skipJreProvisioning=true
           /d:sonar.coverageReportPaths=TestResults/coverage/SonarQube.xml
 
       - run: dotnet build Lintel.slnx -c Release --no-restore
@@ -71,7 +74,7 @@ jobs:
 
       - name: SonarQube Cloud - end analysis
         if: env.SONAR_ANALYSIS == 'true'
-        run: dotnet sonarscanner end
+        run: dotnet sonarscanner end /d:sonar.token="${{ steps.sonar-auth.outputs.sonar-token }}"
 
       - uses: actions/upload-artifact@v7
         if: always()

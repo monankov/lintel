@@ -38,7 +38,7 @@ jobs:
         if: always()
         run: |
           dotnet reportgenerator "-reports:TestResults/*.cobertura.xml" "-targetdir:TestResults/coverage" \
-            "-reporttypes:Html;JsonSummary;MarkdownSummaryGithub"
+            "-reporttypes:Html;JsonSummary;MarkdownSummaryGithub;Cobertura"
           cat TestResults/coverage/SummaryGithub.md >> "$GITHUB_STEP_SUMMARY"
 
       # Coverage for the codecov.io badge and pull request comments. Uses OIDC (no token); pull requests from forks
@@ -46,7 +46,9 @@ jobs:
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v7
         with:
-          directory: TestResults
+          # The merged report of all test projects (the same numbers as the thresholds below).
+          files: TestResults/coverage/Cobertura.xml
+          disable_search: true
           use_oidc: ${{ !(github.event_name == 'pull_request' && github.event.pull_request.head.repo.fork) }}
 
       - uses: actions/upload-artifact@v7

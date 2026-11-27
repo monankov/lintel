@@ -61,7 +61,7 @@ internal static class TestContextFactory
 
     public static ViewContext ViewContext(HttpContext httpContext, RouteValueDictionary? routeValues = null)
     {
-        var actionContext = new ActionContext(httpContext, new RouteData(routeValues ?? new RouteValueDictionary()), new ActionDescriptor());
+        var actionContext = new ActionContext(httpContext, new RouteData(routeValues ?? []), new ActionDescriptor());
         return new ViewContext { HttpContext = httpContext, RouteData = actionContext.RouteData, ActionDescriptor = actionContext.ActionDescriptor };
     }
 

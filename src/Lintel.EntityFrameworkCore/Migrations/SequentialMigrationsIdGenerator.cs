@@ -121,10 +121,8 @@ public sealed partial class SequentialMigrationsIdGenerator(ICurrentDbContext cu
 /// </remarks>
 public sealed class SequentialMigrationsOptionsExtension : IDbContextOptionsExtension
 {
-    private DbContextOptionsExtensionInfo? _info;
-
     /// <inheritdoc />
-    public DbContextOptionsExtensionInfo Info => _info ??= new ExtensionInfo(this);
+    public DbContextOptionsExtensionInfo Info => field ??= new ExtensionInfo(this);
 
     /// <inheritdoc />
     public void ApplyServices(IServiceCollection services)

@@ -1,9 +1,9 @@
+using System.Linq.Expressions;
 using Lintel.EntityFrameworkCore.PostgreSql.Tests.TestUtils;
 using Lintel.Primitives;
 using Lintel.Querying;
 using Lintel.Specifications;
 using Microsoft.EntityFrameworkCore;
-using System.Linq.Expressions;
 
 namespace Lintel.EntityFrameworkCore.PostgreSql.Tests;
 

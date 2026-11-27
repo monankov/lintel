@@ -7,15 +7,13 @@ namespace Lintel.Operations;
 /// </summary>
 public class OperationServiceOptions
 {
-    private Type _executorServiceType = typeof(OperationExecutor);
-
     /// <summary>
     /// The implementation of <see cref="IOperationExecutor"/>. Defaults to <see cref="OperationExecutor"/>.
     /// </summary>
     /// <exception cref="ArgumentException">If the type is not a non-abstract implementation of <see cref="IOperationExecutor"/>.</exception>
     public Type ExecutorServiceType
     {
-        get => _executorServiceType;
+        get;
         set
         {
             ArgumentNullException.ThrowIfNull(value);
@@ -23,9 +21,9 @@ public class OperationServiceOptions
             {
                 throw new ArgumentException($"Type '{value.FullName}' must be a non-abstract implementation of {nameof(IOperationExecutor)}.", nameof(value));
             }
-            _executorServiceType = value;
+            field = value;
         }
-    }
+    } = typeof(OperationExecutor);
 
     /// <summary>
     /// The lifetime of the <see cref="IOperationExecutor"/> service. Defaults to <see cref="ServiceLifetime.Transient"/>.

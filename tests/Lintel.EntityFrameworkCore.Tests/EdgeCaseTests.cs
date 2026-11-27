@@ -1,5 +1,5 @@
-using Lintel.EntityFrameworkCore.Utilities;
 using Lintel.EntityFrameworkCore.Tests.TestUtils;
+using Lintel.EntityFrameworkCore.Utilities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 

@@ -83,9 +83,8 @@ public static class StructrEncryptor
     public static string Encrypt(string input, string passphrase)
     {
         var buffer = Encoding.UTF8.GetBytes(input);
-        using var hash = SHA512.Create();
         var aesKey = new byte[24];
-        Buffer.BlockCopy(hash.ComputeHash(Encoding.UTF8.GetBytes(passphrase)), 0, aesKey, 0, 24);
+        Buffer.BlockCopy(SHA512.HashData(Encoding.UTF8.GetBytes(passphrase)), 0, aesKey, 0, 24);
         using var aes = Aes.Create();
         aes.Key = aesKey;
         using var encryptor = aes.CreateEncryptor(aes.Key, aes.IV);
@@ -105,9 +104,8 @@ public static class StructrEncryptor
     public static string Decrypt(string input, string passphrase)
     {
         var combined = Convert.FromBase64String(input);
-        using var hash = SHA512.Create();
         var aesKey = new byte[24];
-        Buffer.BlockCopy(hash.ComputeHash(Encoding.UTF8.GetBytes(passphrase)), 0, aesKey, 0, 24);
+        Buffer.BlockCopy(SHA512.HashData(Encoding.UTF8.GetBytes(passphrase)), 0, aesKey, 0, 24);
         using var aes = Aes.Create();
         aes.Key = aesKey;
         var iv = new byte[aes.IV.Length];

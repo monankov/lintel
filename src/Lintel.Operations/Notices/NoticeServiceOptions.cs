@@ -7,16 +7,13 @@ namespace Lintel.Notices;
 /// </summary>
 public class NoticeServiceOptions
 {
-    private Type _publisherServiceType = typeof(NoticePublisher);
-    private INoticePublishStrategy _publishStrategy = SequentialNoticePublishStrategy.Instance;
-
     /// <summary>
     /// The implementation of <see cref="INoticePublisher"/>. Defaults to <see cref="NoticePublisher"/>.
     /// </summary>
     /// <exception cref="ArgumentException">If the type is not a non-abstract implementation of <see cref="INoticePublisher"/>.</exception>
     public Type PublisherServiceType
     {
-        get => _publisherServiceType;
+        get;
         set
         {
             ArgumentNullException.ThrowIfNull(value);
@@ -24,9 +21,9 @@ public class NoticeServiceOptions
             {
                 throw new ArgumentException($"Type '{value.FullName}' must be a non-abstract implementation of {nameof(INoticePublisher)}.", nameof(value));
             }
-            _publisherServiceType = value;
+            field = value;
         }
-    }
+    } = typeof(NoticePublisher);
 
     /// <summary>
     /// The lifetime of the <see cref="INoticePublisher"/> service. Defaults to <see cref="ServiceLifetime.Transient"/>.
@@ -43,11 +40,11 @@ public class NoticeServiceOptions
     /// </summary>
     public INoticePublishStrategy PublishStrategy
     {
-        get => _publishStrategy;
+        get;
         set
         {
             ArgumentNullException.ThrowIfNull(value);
-            _publishStrategy = value;
+            field = value;
         }
-    }
+    } = SequentialNoticePublishStrategy.Instance;
 }

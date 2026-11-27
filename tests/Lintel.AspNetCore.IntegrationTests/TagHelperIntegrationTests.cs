@@ -1,5 +1,5 @@
-using AngleSharp.Dom;
 using System.Text.Json;
+using AngleSharp.Dom;
 using Lintel.AspNetCore.IntegrationTests.TestUtils;
 
 namespace Lintel.AspNetCore.IntegrationTests;

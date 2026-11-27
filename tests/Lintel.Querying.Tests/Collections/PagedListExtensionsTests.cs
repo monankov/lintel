@@ -111,7 +111,7 @@ public class PagedListExtensionsTests
     [Fact]
     public void ToPagedList_from_null_paged_enumerable_throws()
     {
-        var act = () => ((IPagedEnumerable)null!).ToPagedList(new[] { 1 });
+        var act = () => ((IPagedEnumerable)null!).ToPagedList([1]);
 
         act.Should().Throw<ArgumentNullException>();
     }

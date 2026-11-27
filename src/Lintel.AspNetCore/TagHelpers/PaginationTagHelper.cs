@@ -140,7 +140,7 @@ public class PaginationTagHelper : TagHelper
 
         output.TagMode = TagMode.StartTagAndEndTag;
         output.TagName = "div";
-        output.Attributes.SetAttribute("class", string.Join(' ', new[] { "pagination-container" }.Concat(options.ContainerCssClasses ?? [])));
+        output.Attributes.SetAttribute("class", string.Join(' ', ["pagination-container", .. options.ContainerCssClasses ?? []]));
         output.Content.AppendHtml(ul);
     }
 

@@ -36,7 +36,7 @@ public class FilterTests
     public class UniversalFilter<TOperation, TResult>(IStringWriter writer) : IOperationFilter<TOperation, TResult>
         where TOperation : IOperation<TResult>
     {
-        public async Task<TResult> FilterAsync(TOperation operation, CancellationToken cancellationToken, OperationHandlerDelegate<TResult> next)
+        public async Task<TResult> FilterAsync(TOperation operation, OperationHandlerDelegate<TResult> next, CancellationToken cancellationToken)
         {
             await writer.WriteAsync("UniversalFilter");
             return await next();
@@ -46,7 +46,7 @@ public class FilterTests
     public class QueryFilter<TQuery, TResult>(IStringWriter writer) : IOperationFilter<TQuery, TResult>
         where TQuery : IQuery<TResult>
     {
-        public async Task<TResult> FilterAsync(TQuery operation, CancellationToken cancellationToken, OperationHandlerDelegate<TResult> next)
+        public async Task<TResult> FilterAsync(TQuery operation, OperationHandlerDelegate<TResult> next, CancellationToken cancellationToken)
         {
             await writer.WriteAsync("QueryFilter");
             return await next();
@@ -56,7 +56,7 @@ public class FilterTests
     public class AfterFilter<TOperation, TResult>(IStringWriter writer) : IOperationFilter<TOperation, TResult>
         where TOperation : IOperation<TResult>
     {
-        public async Task<TResult> FilterAsync(TOperation operation, CancellationToken cancellationToken, OperationHandlerDelegate<TResult> next)
+        public async Task<TResult> FilterAsync(TOperation operation, OperationHandlerDelegate<TResult> next, CancellationToken cancellationToken)
         {
             var result = await next();
             await writer.WriteAsync("AfterFilter");
@@ -66,7 +66,7 @@ public class FilterTests
 
     public class BarQueryOnlyFilter(IStringWriter writer) : IOperationFilter<BarQuery, int>
     {
-        public async Task<int> FilterAsync(BarQuery operation, CancellationToken cancellationToken, OperationHandlerDelegate<int> next)
+        public async Task<int> FilterAsync(BarQuery operation, OperationHandlerDelegate<int> next, CancellationToken cancellationToken)
         {
             var result = await next();
             writer.Write("BarQueryOnlyFilter");
@@ -76,7 +76,7 @@ public class FilterTests
 
     public class ShortCircuitFilter : IOperationFilter<BarQuery, int>
     {
-        public Task<int> FilterAsync(BarQuery operation, CancellationToken cancellationToken, OperationHandlerDelegate<int> next)
+        public Task<int> FilterAsync(BarQuery operation, OperationHandlerDelegate<int> next, CancellationToken cancellationToken)
             => Task.FromResult(-1);
     }
 

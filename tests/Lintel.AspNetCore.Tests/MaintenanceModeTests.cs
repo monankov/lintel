@@ -121,7 +121,7 @@ public sealed class MaintenanceModeTests : IDisposable
 
         var monitor = Substitute.For<IOptionsMonitor<MaintenanceModeOptions>>();
         var provider = new FixedProvider(false);
-        RequestDelegate next = _ => Task.CompletedTask;
+        static Task next(HttpContext _) => Task.CompletedTask;
         var actions = new Action[]
         {
             () => ((IServiceCollection)null!).AddMaintenanceMode(),

@@ -38,7 +38,7 @@ public sealed class IpNetworkList : IReadOnlyCollection<IPNetwork>
     {
         ArgumentNullException.ThrowIfNull(entries);
 
-        return new(entries.Select(ParseEntry).ToList());
+        return new([.. entries.Select(ParseEntry)]);
     }
 
     /// <summary>Whether <paramref name="address"/> belongs to one of the networks.</summary>

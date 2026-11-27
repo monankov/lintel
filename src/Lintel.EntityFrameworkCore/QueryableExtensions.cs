@@ -35,7 +35,7 @@ public static class QueryableExtensions
         var totalItems = await source.CountAsync(cancellationToken).ConfigureAwait(false);
         if (totalItems == 0)
         {
-            return PagedList.Empty<T>();
+            return [];
         }
 
         if (pageSize <= 0)

@@ -60,7 +60,7 @@ public class MenuTests
         services.AddNavigation();
         if (authorization)
         {
-            services.AddAuthorization(o => o.AddPolicy("Admins", p => p.RequireRole("Admin")));
+            services.AddAuthorizationBuilder().AddPolicy("Admins", p => p.RequireRole("Admin"));
         }
         return (services.BuildServiceProvider(), accessor, provider);
     }
@@ -68,7 +68,7 @@ public class MenuTests
     private static Endpoint WithMenu(string id) => new(null, new EndpointMetadataCollection(new MenuAttribute(id)), "test");
 
     private static List<string?> Active(MenuItem[] tree, NavigationOptions<MenuItem> options)
-        => tree.SelectMany(root => root.Descendants.Prepend(root)).Where(item => options.ItemActivator!(item)).Select(item => item.Id).ToList();
+        => [.. tree.SelectMany(root => root.Descendants.Prepend(root)).Where(item => options.ItemActivator!(item)).Select(item => item.Id)];
 
     [Theory]
     [InlineData("/", "home")]

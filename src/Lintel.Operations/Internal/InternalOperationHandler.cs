@@ -31,7 +31,7 @@ internal sealed class InternalOperationHandler<TOperation, TResult> : InternalHa
         {
             var filter = filters[i];
             var next = pipeline;
-            pipeline = () => filter.FilterAsync(typedOperation, cancellationToken, next);
+            pipeline = () => filter.FilterAsync(typedOperation, next, cancellationToken);
         }
 
         return pipeline();

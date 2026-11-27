@@ -20,7 +20,7 @@ public class ValidationSummaryTagHelperTests
         var viewContext = TestContextFactory.ViewContext(TestContextFactory.HttpContext());
         viewContext.ViewData = viewData;
 
-        var output = new TagHelperOutput("validation-summary", new TagHelperAttributeList(attributes),
+        var output = new TagHelperOutput("validation-summary", [.. attributes],
             (_, _) => Task.FromResult<TagHelperContent>(new DefaultTagHelperContent()));
         new ValidationSummaryTagHelper(Options.Create(options ?? new ValidationSummaryOptions()))
         {

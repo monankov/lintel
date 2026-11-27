@@ -84,10 +84,9 @@ public class NavigationOptions<TNavigationItem>
 public class NavigationBuilder<TNavigationItem> : INavigationBuilder<TNavigationItem>
     where TNavigationItem : NavigationItem<TNavigationItem>, new()
 {
-    private static readonly PropertyInfo[] _copiedProperties = typeof(TNavigationItem)
+    private static readonly PropertyInfo[] _copiedProperties = [.. typeof(TNavigationItem)
         .GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic)
-        .Where(property => property.CanWrite && property.CanRead && property.GetIndexParameters().Length == 0)
-        .ToArray();
+        .Where(property => property.CanWrite && property.CanRead && property.GetIndexParameters().Length == 0)];
 
     private static readonly ConcurrentDictionary<Type, ResourceManager> _resourceManagers = new();
 
@@ -197,7 +196,7 @@ public class Navigation<TNavigationItem> : INavigation<TNavigationItem>
     {
         ArgumentNullException.ThrowIfNull(builder);
 
-        _items = builder.BuildNavigation().ToList();
+        _items = [.. builder.BuildNavigation()];
         Active = _items.FirstOrDefault(x => x.IsActive) ?? _items.SelectMany(x => x.Descendants).FirstOrDefault(x => x.IsActive);
     }
 

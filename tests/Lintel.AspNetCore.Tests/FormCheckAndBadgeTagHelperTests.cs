@@ -135,7 +135,7 @@ public class FormCheckAndBadgeTagHelperTests
 
     private static string Badge(object? value, bool? hidden = null, params TagHelperAttribute[] attributes)
     {
-        var output = new TagHelperOutput("tab-badge", new TagHelperAttributeList(attributes),
+        var output = new TagHelperOutput("tab-badge", [.. attributes],
             (_, _) => Task.FromResult<TagHelperContent>(new DefaultTagHelperContent()));
         new TabBadgeTagHelper { Value = value, Hidden = hidden }.Process(Context("tab-badge"), output);
         return Render(output);

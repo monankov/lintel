@@ -31,7 +31,7 @@ internal static class XmlJsonConverter
             var children = group.ToList();
             result[group.Key] = children.Count == 1
                 ? ToNode(children[0])
-                : new JsonArray(children.Select(ToNode).ToArray());
+                : new JsonArray([.. children.Select(ToNode)]);
         }
         return result;
     }

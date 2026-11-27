@@ -10,9 +10,8 @@ internal abstract class InternalHandler
 internal sealed class InternalNoticeHandler<TNotice> : InternalHandler where TNotice : INotice
 {
     public override IEnumerable<Func<INotice, CancellationToken, Task>> GetHandlers(IServiceProvider serviceProvider)
-        => serviceProvider
+        => [.. serviceProvider
             .GetServices<INoticeHandler<TNotice>>()
             .Select(handler => new Func<INotice, CancellationToken, Task>(
-                (notice, cancellationToken) => handler.HandleAsync((TNotice)notice, cancellationToken)))
-            .ToArray();
+                (notice, cancellationToken) => handler.HandleAsync((TNotice)notice, cancellationToken)))];
 }

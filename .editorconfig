@@ -66,7 +66,8 @@ dotnet_style_require_accessibility_modifiers = for_non_interface_members:silent
 dotnet_style_coalesce_expression = true:suggestion
 dotnet_style_collection_initializer = true:suggestion
 dotnet_style_explicit_tuple_names = true:suggestion
-dotnet_style_namespace_match_folder = true:suggestion
+# Namespaces group by feature, not by package (Lintel.Notices lives in Lintel.Operations): IDE0130 is off.
+dotnet_style_namespace_match_folder = false
 dotnet_style_null_propagation = true:suggestion
 dotnet_style_object_initializer = true:suggestion
 dotnet_style_operator_placement_when_wrapping = beginning_of_line
@@ -74,7 +75,8 @@ dotnet_style_prefer_auto_properties = true:suggestion
 dotnet_style_prefer_collection_expression = when_types_loosely_match:suggestion
 dotnet_style_prefer_compound_assignment = true:suggestion
 dotnet_style_prefer_conditional_expression_over_assignment = true:suggestion
-dotnet_style_prefer_conditional_expression_over_return = true:suggestion
+# Several early returns read better than nested ?: (IDE0046).
+dotnet_style_prefer_conditional_expression_over_return = false
 dotnet_style_prefer_foreach_explicit_cast_in_source = when_strongly_typed:suggestion
 dotnet_style_prefer_inferred_anonymous_type_member_names = true:suggestion
 dotnet_style_prefer_inferred_tuple_names = true:suggestion
@@ -86,7 +88,8 @@ dotnet_style_prefer_simplified_interpolation = true:suggestion
 dotnet_style_readonly_field = true:warning
 
 # Parameter preferences
-dotnet_code_quality_unused_parameters = all:suggestion
+# Public API (operators, interface implementations) may need parameters it does not use (IDE0060).
+dotnet_code_quality_unused_parameters = non_public:suggestion
 
 # Suppression preferences
 dotnet_remove_unnecessary_suppression_exclusions = none
@@ -132,7 +135,8 @@ csharp_prefer_braces = true:silent
 csharp_prefer_simple_using_statement = true:suggestion
 csharp_style_namespace_declarations = file_scoped:suggestion
 csharp_style_prefer_method_group_conversion = true:silent
-csharp_style_prefer_primary_constructors = true:suggestion
+# Explicit constructors keep argument checks and field assignments visible (IDE0290).
+csharp_style_prefer_primary_constructors = false
 csharp_style_prefer_top_level_statements = true:silent
 
 # Expression-level preferences
@@ -391,3 +395,11 @@ dotnet_naming_style.s_camelcase.required_suffix =
 dotnet_naming_style.s_camelcase.word_separator = 
 dotnet_naming_style.s_camelcase.capitalization = camel_case
 
+# Tests: inline arrays and data, instance members used by xUnit, and intentional use of base types and
+# non-generic overloads are fine.
+[tests/**.cs]
+dotnet_diagnostic.CA1822.severity = none
+dotnet_diagnostic.CA1859.severity = none
+dotnet_diagnostic.CA1861.severity = none
+dotnet_diagnostic.CA2263.severity = none
+dotnet_diagnostic.xUnit1045.severity = none

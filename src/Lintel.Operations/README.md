@@ -54,7 +54,7 @@ A filter runs before and after the handler. Call `next()` to continue:
 public sealed class LoggingFilter<TOperation, TResult>(ILogger<TOperation> logger) : IOperationFilter<TOperation, TResult>
     where TOperation : IOperation<TResult>
 {
-    public async Task<TResult> FilterAsync(TOperation operation, CancellationToken cancellationToken, OperationHandlerDelegate<TResult> next)
+    public async Task<TResult> FilterAsync(TOperation operation, OperationHandlerDelegate<TResult> next, CancellationToken cancellationToken)
     {
         logger.LogInformation("Executing {Operation}", typeof(TOperation).Name);
         return await next();

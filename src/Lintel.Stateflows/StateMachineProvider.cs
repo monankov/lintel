@@ -62,7 +62,7 @@ public class StateMachineProvider : IStateMachineProvider
         IEnumerable<IStateMachineConfiguration<TEntity, TState, TTrigger>> configurations;
         try
         {
-            configurations = _serviceProvider.GetServices<IStateMachineConfiguration<TEntity, TState, TTrigger>>().ToList();
+            configurations = [.. _serviceProvider.GetServices<IStateMachineConfiguration<TEntity, TState, TTrigger>>()];
         }
         catch (Exception ex) when (ex is InvalidOperationException or ArgumentException)
         {

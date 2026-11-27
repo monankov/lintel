@@ -1,6 +1,6 @@
-using Microsoft.Extensions.DependencyInjection;
 using Lintel.Navigation;
 using Lintel.Navigation.Providers;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Lintel.Navigation

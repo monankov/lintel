@@ -22,7 +22,7 @@ public class ClientTests
         public void SaveTempData(HttpContext context, IDictionary<string, object> values) => _data = values;
     }
 
-    private static (HttpContext Context, IServiceProvider Services) Request(RouteValueDictionary? route = null)
+    private static (HttpContext Context, IServiceProvider Services) Request()
     {
         var services = new ServiceCollection()
             .AddAspNetCore()

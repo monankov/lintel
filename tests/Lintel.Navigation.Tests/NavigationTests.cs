@@ -345,7 +345,7 @@ public sealed class NavigationTests : IDisposable
         item.Equals((object)new MenuItem { Id = "ORDERS" }).Should().BeTrue();
         withoutId.Equals(new MenuItem()).Should().BeFalse();
         withoutId.GetHashCode().Should().Be(withoutId.GetHashCode());
-        new HashSet<MenuItem> { withoutId, new MenuItem() }.Should().HaveCount(2);
+        new HashSet<MenuItem> { withoutId, new() }.Should().HaveCount(2);
 
         // Last: the compiler treats x.Equals(null) as a null check of x.
         item.Equals(null).Should().BeFalse();

@@ -1,6 +1,6 @@
-using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 using Lintel.Stateflows;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Lintel.Stateflows
@@ -10,13 +10,11 @@ namespace Lintel.Stateflows
     /// </summary>
     public class StateflowServiceOptions
     {
-        private Type _providerServiceType = typeof(StateMachineProvider);
-
         /// <summary>The implementation of <see cref="IStateMachineProvider"/>. Defaults to <see cref="StateMachineProvider"/>.</summary>
         /// <exception cref="ArgumentException">If the type is not a non-abstract implementation of <see cref="IStateMachineProvider"/>.</exception>
         public Type ProviderServiceType
         {
-            get => _providerServiceType;
+            get;
             set
             {
                 ArgumentNullException.ThrowIfNull(value);
@@ -24,9 +22,9 @@ namespace Lintel.Stateflows
                 {
                     throw new ArgumentException($"Type '{value.FullName}' must be a non-abstract implementation of {nameof(IStateMachineProvider)}.", nameof(value));
                 }
-                _providerServiceType = value;
+                field = value;
             }
-        }
+        } = typeof(StateMachineProvider);
 
         /// <summary>The lifetime of <see cref="IStateMachineProvider"/>. Defaults to <see cref="ServiceLifetime.Transient"/>.</summary>
         public ServiceLifetime ProviderServiceLifetime { get; set; } = ServiceLifetime.Transient;

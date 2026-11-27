@@ -21,10 +21,9 @@ public class ValueObject<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTy
     : IEquatable<TValueObject>
     where TValueObject : ValueObject<TValueObject>
 {
-    private static readonly PropertyInfo[] _properties = typeof(TValueObject)
+    private static readonly PropertyInfo[] _properties = [.. typeof(TValueObject)
         .GetProperties(BindingFlags.Public | BindingFlags.Instance)
-        .Where(property => property.CanRead && property.GetIndexParameters().Length == 0)
-        .ToArray();
+        .Where(property => property.CanRead && property.GetIndexParameters().Length == 0)];
 
     /// <inheritdoc />
     public virtual bool Equals(TValueObject? other)

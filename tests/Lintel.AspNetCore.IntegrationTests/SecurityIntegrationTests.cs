@@ -33,7 +33,7 @@ public sealed class SecurityIntegrationTests : IAsyncLifetime
         var allowed = IpNetworkList.Parse(builder.Configuration.GetSection("AllowedIp").Get<string[]>()!);
         builder.Services.AddForwardedHeaders(builder.Configuration.GetSection("ForwardedHeaders"));
         builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie();
-        builder.Services.AddAuthorization(o => o.AddPolicy("Intranet", p => p.RequireAllowedNetwork(allowed)));
+        builder.Services.AddAuthorizationBuilder().AddPolicy("Intranet", p => p.RequireAllowedNetwork(allowed));
 
         _app = builder.Build();
         _app.Use((context, next) =>

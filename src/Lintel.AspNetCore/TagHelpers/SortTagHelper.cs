@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Razor.TagHelpers;
+using Microsoft.AspNetCore.Routing;
 
 namespace Lintel.AspNetCore.TagHelpers;
 
@@ -110,10 +111,10 @@ public class SortTagHelper : TagHelper
         output.Content.SetHtmlContent(a);
     }
 
-    private static string? Find(IDictionary<string, object?> values, string key)
+    private static string? Find(RouteValueDictionary values, string key)
         => values.FirstOrDefault(value => string.Equals(value.Key, key, StringComparison.OrdinalIgnoreCase)).Value?.ToString();
 
-    private static void Remove(IDictionary<string, object?> values, string key)
+    private static void Remove(RouteValueDictionary values, string key)
     {
         foreach (var existing in values.Keys.Where(k => string.Equals(k, key, StringComparison.OrdinalIgnoreCase)).ToList())
         {

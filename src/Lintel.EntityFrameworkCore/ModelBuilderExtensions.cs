@@ -1,8 +1,8 @@
 using System.Linq.Expressions;
 using System.Reflection;
 using Lintel.Domain;
-using Lintel.EntityFrameworkCore.Utilities;
 using Lintel.EntityFrameworkCore.Options;
+using Lintel.EntityFrameworkCore.Utilities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -242,7 +242,7 @@ public static class ModelBuilderExtensions
             types = types.Where(filter);
         }
 
-        return types.ToList();
+        return [.. types];
     }
 
     // Value object types used by entities were discovered by convention as entity types. After their usages

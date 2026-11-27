@@ -1,3 +1,5 @@
+using System.Diagnostics.CodeAnalysis;
+
 namespace Lintel.Domain;
 
 /// <summary>
@@ -28,6 +30,7 @@ public abstract class Entity<TEntity> : IEquatable<TEntity>
     /// Initializes a new instance of the entity.
     /// </summary>
     /// <exception cref="InvalidOperationException">If <typeparamref name="TEntity"/> is not the deriving type.</exception>
+    [SuppressMessage("Major Code Smell", "S3060", Justification = "Checks the self-referencing generic argument, not a subtype.")]
     protected Entity()
     {
         if (this is not TEntity)

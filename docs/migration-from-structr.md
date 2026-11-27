@@ -38,8 +38,19 @@ The other Structr packages are not moved. See [section 4](#4-what-is-not-moved) 
 
 ### Lintel.Operations
 
-- `AddOperations`, `AddNotices`, all interfaces and the handler base classes (`OperationHandler`,
-  `AsyncOperationHandler`, `NoticeHandler`, `AsyncNoticeHandler`) keep their signatures.
+- `AddOperations`, `AddNotices`, the handler base classes (`OperationHandler`, `AsyncOperationHandler`,
+  `NoticeHandler`, `AsyncNoticeHandler`) and all interfaces except `IOperationFilter` keep their signatures.
+- **Breaking:** in `IOperationFilter.FilterAsync` the cancellation token is now the last parameter, as .NET
+  recommends. Swap the last two parameters in every filter:
+
+  ```csharp
+  // Structr
+  public Task<TResult> FilterAsync(TOperation operation, CancellationToken cancellationToken, OperationHandlerDelegate<TResult> next)
+  // Lintel
+  public Task<TResult> FilterAsync(TOperation operation, OperationHandlerDelegate<TResult> next, CancellationToken cancellationToken)
+  ```
+
+  Calls of `next()` do not change.
 - New: `AddOperationFilter(typeof(MyFilter<,>))` checks the filter type and does not register it twice.
 - New options: `HandlerServiceLifetime` and `NoticeServiceOptions.PublishStrategy`
   (`SequentialNoticePublishStrategy` by default, or `ParallelNoticePublishStrategy`).

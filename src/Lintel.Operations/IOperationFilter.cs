@@ -17,8 +17,8 @@ public interface IOperationFilter<in TOperation, TResult>
     /// Filters an executed operation.
     /// </summary>
     /// <param name="operation">The operation being executed.</param>
-    /// <param name="cancellationToken">A token to observe while waiting for the task to complete.</param>
     /// <param name="next">The next filter in the pipeline or the operation handler itself.</param>
+    /// <param name="cancellationToken">A token to observe while waiting for the task to complete.</param>
     /// <returns>A task whose result is the operation result.</returns>
-    Task<TResult> FilterAsync(TOperation operation, CancellationToken cancellationToken, OperationHandlerDelegate<TResult> next);
+    Task<TResult> FilterAsync(TOperation operation, OperationHandlerDelegate<TResult> next, CancellationToken cancellationToken);
 }

@@ -26,7 +26,7 @@ public class HierarchyId
     {
         ArgumentNullException.ThrowIfNull(nodes);
 
-        _nodes = Validate(nodes.ToList(), nameof(nodes));
+        _nodes = Validate([.. nodes], nameof(nodes));
     }
 
     /// <summary>The node identifiers, root first.</summary>

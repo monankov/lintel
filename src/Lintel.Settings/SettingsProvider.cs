@@ -13,10 +13,9 @@ namespace Lintel.Settings;
 /// <typeparam name="TSettings">The settings type.</typeparam>
 public abstract class SettingsProvider<TSettings> where TSettings : class, new()
 {
-    private static readonly PropertyInfo[] _writableProperties = typeof(TSettings)
+    private static readonly PropertyInfo[] _writableProperties = [.. typeof(TSettings)
         .GetProperties(BindingFlags.Public | BindingFlags.Instance)
-        .Where(property => property.GetIndexParameters().Length == 0 && property.GetSetMethod(nonPublic: true) is not null)
-        .ToArray();
+        .Where(property => property.GetIndexParameters().Length == 0 && property.GetSetMethod(nonPublic: true) is not null)];
 
     private readonly Lock _lock = new();
     private TSettings? _cache;

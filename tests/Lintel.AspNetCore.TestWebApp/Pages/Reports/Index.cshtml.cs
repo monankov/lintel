@@ -10,7 +10,7 @@ namespace Lintel.AspNetCore.TestWebApp.Pages.Reports;
 /// </summary>
 public sealed class IndexModel : PageModel
 {
-    public PagedList<Product> Products { get; private set; } = PagedList.Empty<Product>();
+    public PagedList<Product> Products { get; private set; } = [];
 
     public void OnGet()
     {

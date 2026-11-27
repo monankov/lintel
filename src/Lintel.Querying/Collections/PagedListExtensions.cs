@@ -48,7 +48,7 @@ public static class PagedListExtensions
 
         if (totalItems == 0)
         {
-            return PagedList.Empty<T>();
+            return [];
         }
 
         if (pageSize <= 0)
@@ -83,12 +83,12 @@ public static class PagedListExtensions
         var totalItems = source.Count();
         if (totalItems == 0)
         {
-            return PagedList.Empty<T>();
+            return [];
         }
 
         if (pageSize <= 0)
         {
-            return new PagedList<T>(source.ToList(), totalItems, pageNumber, totalItems);
+            return new PagedList<T>([.. source], totalItems, pageNumber, totalItems);
         }
 
         var items = source.Skip(Skip(pageNumber, pageSize)).Take(pageSize).ToList();

@@ -8,7 +8,7 @@ public class EnabledTagHelperTests
 {
     private static string Render(string tagName, bool enabled, params TagHelperAttribute[] attributes)
     {
-        var output = new TagHelperOutput(tagName, new TagHelperAttributeList(attributes),
+        var output = new TagHelperOutput(tagName, [.. attributes],
             (_, _) => Task.FromResult<TagHelperContent>(new DefaultTagHelperContent()));
         output.Content.SetContent("x");
         new EnabledTagHelper { Enabled = enabled }.Process(Context(tagName), output);

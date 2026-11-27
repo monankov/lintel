@@ -56,7 +56,7 @@ public class JsonNavigationProvider<TNavigationItem> : INavigationProvider<TNavi
         var root = JsonNode.Parse(content, documentOptions: new JsonDocumentOptions { CommentHandling = JsonCommentHandling.Skip, AllowTrailingCommas = true })
             as JsonArray ?? throw new InvalidOperationException("The navigation JSON must be an array of items.");
 
-        return root.OfType<JsonObject>().Select(Parse).ToList();
+        return [.. root.OfType<JsonObject>().Select(Parse)];
     }
 
     private static TNavigationItem Parse(JsonObject json)
@@ -156,7 +156,7 @@ public class XmlNavigationProvider<TNavigationItem> : INavigationProvider<TNavig
         }
 
         var root = XDocument.Load(_path).Root ?? throw new InvalidOperationException("Invalid navigation xml file.");
-        return root.Elements().Select(Parse).ToList();
+        return [.. root.Elements().Select(Parse)];
     }
 
     private static TNavigationItem Parse(XElement element)

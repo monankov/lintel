@@ -21,7 +21,7 @@ public class ClientAlertsTagHelperTests
 
     private static string Render(ClientAlertsTagHelper helper, params TagHelperAttribute[] attributes)
     {
-        var output = new TagHelperOutput("client-alerts", new TagHelperAttributeList(attributes),
+        var output = new TagHelperOutput("client-alerts", [.. attributes],
             (_, _) => Task.FromResult<TagHelperContent>(new DefaultTagHelperContent()));
         helper.Process(Context("client-alerts"), output);
         return TestUtils.TagHelperRunner.Render(output);

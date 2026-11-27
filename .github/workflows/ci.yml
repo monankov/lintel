@@ -13,6 +13,7 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
+    # Actions outside the actions/ organization are pinned to a commit SHA (Dependabot updates the SHA and the comment).
     permissions:
       contents: read
       id-token: write   # OIDC (NuGet, Codecov, SonarQube Cloud): GitHub issues a token that is exchanged for a temporary key
@@ -39,16 +40,21 @@ jobs:
         with:
           java-version: 21
           distribution: zulu
-      - uses: SonarSource/sonarqube-auth-action@v1.2   # a temporary token, valid for 30 minutes
+      # A temporary SonarQube Cloud token, valid for 30 minutes.
+      - uses: SonarSource/sonarqube-auth-action@b372e2c2930aadfcc4f4399446da1e12772709ad # v1.2
         id: sonar-auth
         if: env.SONAR_ANALYSIS == 'true'
+      # /v is the last released version (tag v*): with the "Previous version" new code definition, new code is
+      # everything changed since the last release.
       - name: SonarQube Cloud - begin analysis
         if: env.SONAR_ANALYSIS == 'true'
         run: >
           dotnet sonarscanner begin /k:"monankov_lintel" /o:"monankov"
+          /v:"$( (git describe --tags --abbrev=0 --match 'v*' 2>/dev/null || echo v0.0.0) | sed 's/^v//')"
           /d:sonar.token="${{ steps.sonar-auth.outputs.sonar-token }}"
           /d:sonar.scanner.skipJreProvisioning=true
           /d:sonar.coverageReportPaths=TestResults/coverage/SonarQube.xml
+          /d:sonar.exclusions=tests/Lintel.AspNetCore.TestWebApp/**
 
       - run: dotnet build Lintel.slnx -c Release --no-restore
       - run: dotnet test --solution Lintel.slnx -c Release --no-build -p:CollectCoverage=true
@@ -65,7 +71,7 @@ jobs:
       # Coverage for the codecov.io badge and pull request comments. Uses OIDC (no token); pull requests from forks
       # get no OIDC token and upload without one. An upload error does not fail the build.
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v7
+        uses: codecov/codecov-action@303a32d7a59b442fa8d48b6a1cc6825c09c847a5 # v7.1.1
         with:
           # The merged report of all test projects (the same numbers as the thresholds below).
           files: TestResults/coverage/Cobertura.xml
@@ -106,7 +112,7 @@ jobs:
       - name: NuGet login (Trusted Publishing)
         if: startsWith(github.ref, 'refs/tags/v')
         id: nuget-login
-        uses: NuGet/login@v1
+        uses: NuGet/login@8d196754b4036150537f80ac539e15c2f1028841 # v1.2.0
         with:
           user: ${{ secrets.NUGET_USER }}
 

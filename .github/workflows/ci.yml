@@ -41,6 +41,14 @@ jobs:
             "-reporttypes:Html;JsonSummary;MarkdownSummaryGithub"
           cat TestResults/coverage/SummaryGithub.md >> "$GITHUB_STEP_SUMMARY"
 
+      # Coverage for the codecov.io badge and pull request comments. Uses OIDC (no token); pull requests from forks
+      # get no OIDC token and upload without one. An upload error does not fail the build.
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v7
+        with:
+          directory: TestResults
+          use_oidc: ${{ !(github.event_name == 'pull_request' && github.event.pull_request.head.repo.fork) }}
+
       - uses: actions/upload-artifact@v7
         if: always()
         with:

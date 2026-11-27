@@ -3,6 +3,9 @@
 # Lintel
 
 [![CI](https://github.com/monankov/lintel/actions/workflows/ci.yml/badge.svg)](https://github.com/monankov/lintel/actions/workflows/ci.yml)
+[![codecov](https://codecov.io/gh/monankov/lintel/graph/badge.svg)](https://codecov.io/gh/monankov/lintel)
+[![.NET 10](https://img.shields.io/badge/.NET-10-512BD4)](https://dotnet.microsoft.com/download/dotnet/10.0)
+[![License](https://img.shields.io/github/license/monankov/lintel)](LICENSE)
 
 Lightweight building blocks for .NET 10 applications: an in-process mediator, specifications and paging,
 domain base types, EF Core and ASP.NET Core integrations.

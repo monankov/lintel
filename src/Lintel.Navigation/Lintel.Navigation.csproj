@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Description>Menu and breadcrumb navigation loaded from JSON or XML, with filtering, localization and caching.</Description>
+    <PackageTags>$(PackageTags);navigation;menu;breadcrumbs</PackageTags>
+    <!-- Items are read and copied by reflection over user types. -->
+    <IsAotCompatible>false</IsAotCompatible>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
+  </ItemGroup>
+
+</Project>

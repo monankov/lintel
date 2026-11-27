@@ -1,0 +1,10 @@
+@model ChecksForm
+<form id="checks" method="post">
+    <checkbox id="agree" asp-for="Agree" />
+    <checkbox id="news" asp-for="Newsletter" asp-switch="true" asp-inline="true" />
+    <radio id="person" asp-for="Kind" value="person" asp-label="Person" />
+    <radio id="company" asp-for="Kind" value="company" asp-label="Company" />
+    <checkbox id="all" asp-for="Agree" asp-label="Select all" asp-input-id="check-all"><input type="checkbox" id="check-all" /></checkbox>
+    <tab-badge id="badge-big" value="1234" title="Orders" />
+    <tab-badge id="badge-zero" value="0" />
+</form>

@@ -1,0 +1,10 @@
+@page
+@model Lintel.AspNetCore.TestWebApp.Pages.Reports.IndexModel
+<h1>Reports</h1>
+<ul id="report-items">
+    @foreach (var product in Model.Products)
+    {
+        <li>@product.Name</li>
+    }
+</ul>
+<pagination asp-options="new PaginationOptions { PagedEnumerable = Model.Products }" />

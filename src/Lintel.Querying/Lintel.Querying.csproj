@@ -1,0 +1,7 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Description>Specifications, paging and dynamic sorting for IEnumerable and IQueryable.</Description>
+  </PropertyGroup>
+
+</Project>

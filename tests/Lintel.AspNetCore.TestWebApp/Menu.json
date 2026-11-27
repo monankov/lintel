@@ -1,0 +1,19 @@
+[
+  {
+    "Id": "main",
+    "Title": "Main",
+    "Children": [
+      { "Id": "side-home", "Title": "Home", "Url": "/" },
+      { "Id": "side-bookings", "Title": "Bookings", "Url": "/bookings/" },
+      { "Id": "side-catalog", "Title": "Catalog", "Url": "/products" },
+      { "Id": "side-reports", "Title": "Reports", "Url": "/reports", "Policy": "Everyone" }
+    ]
+  },
+  {
+    "Id": "admin",
+    "Title": "Administration",
+    "Children": [
+      { "Id": "side-users", "Title": "Users", "Url": "/admin/users", "Policy": "Administrators" }
+    ]
+  }
+]

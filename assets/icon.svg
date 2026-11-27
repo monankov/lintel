@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 140" width="140" height="140">
+  <title>Lintel</title>
+  <rect width="140" height="140" rx="28" fill="#111111"/>
+  <polygon points="38,22 63,22 63,94 38,118" fill="#2DD4BF"/>
+  <polygon points="38,118 63,94 63,118" fill="#0F766E"/>
+  <polygon points="63,94 106,94 106,118 63,118" fill="#14B8A6"/>
+</svg>

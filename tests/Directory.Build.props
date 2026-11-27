@@ -1,0 +1,38 @@
+<Project>
+
+  <Import Project="$([MSBuild]::GetPathOfFileAbove('Directory.Build.props', '$(MSBuildThisFileDirectory)../'))" />
+
+  <!-- Test projects are named *Tests; other projects here (test applications) are not tests. -->
+  <PropertyGroup>
+    <IsPackable>false</IsPackable>
+    <LintelIsTestProject>$(MSBuildProjectName.EndsWith('Tests'))</LintelIsTestProject>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(LintelIsTestProject)' == 'true'">
+    <IsTestProject>true</IsTestProject>
+    <OutputType>Exe</OutputType>
+    <!-- Test method names use underscores: Method_State_Expected -->
+    <NoWarn>$(NoWarn);CA1707</NoWarn>
+  </PropertyGroup>
+
+  <!-- dotnet test -p:CollectCoverage=true writes TestResults/<project>.cobertura.xml (only Lintel.* assemblies). -->
+  <PropertyGroup Condition="'$(LintelIsTestProject)' == 'true' and '$(CollectCoverage)' == 'true'">
+    <TestingPlatformCommandLineArguments>$(TestingPlatformCommandLineArguments) --coverage --coverage-output-format cobertura --coverage-output $(MSBuildProjectName).cobertura.xml --coverage-settings $(MSBuildThisFileDirectory)coverage.config</TestingPlatformCommandLineArguments>
+  </PropertyGroup>
+
+  <ItemGroup Condition="'$(LintelIsTestProject)' == 'true'">
+    <PackageReference Include="Microsoft.NET.Test.Sdk" />
+    <PackageReference Include="Microsoft.Testing.Extensions.CodeCoverage" />
+    <PackageReference Include="xunit.v3" />
+    <PackageReference Include="xunit.runner.visualstudio" PrivateAssets="all" />
+    <PackageReference Include="AwesomeAssertions" />
+    <PackageReference Include="NSubstitute" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(LintelIsTestProject)' == 'true'">
+    <Using Include="Xunit" />
+    <Using Include="AwesomeAssertions" />
+    <Using Include="NSubstitute" />
+  </ItemGroup>
+
+</Project>

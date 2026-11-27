@@ -1,0 +1,22 @@
+# Text files are stored and checked out with LF on every OS (CI runs on Linux),
+# overriding core.autocrlf. Git detects text files automatically.
+* text=auto eol=lf
+
+# Windows-only scripts need CRLF.
+*.cmd text eol=crlf
+*.bat text eol=crlf
+
+# Binary files: no line ending conversion and no textual diff.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.pdf binary
+*.zip binary
+*.dll binary
+*.exe binary
+*.nupkg binary
+*.snupkg binary
+*.pfx binary
+*.snk binary

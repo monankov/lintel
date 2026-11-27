@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- Integration tests of Lintel.EntityFrameworkCore on a real PostgreSQL in Docker (Testcontainers). -->
+
+  <ItemGroup>
+    <ProjectReference Include="../../src/Lintel.EntityFrameworkCore/Lintel.EntityFrameworkCore.csproj" />
+    <ProjectReference Include="../../src/Lintel.Primitives/Lintel.Primitives.csproj" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" />
+    <PackageReference Include="Testcontainers.PostgreSql" />
+  </ItemGroup>
+
+</Project>

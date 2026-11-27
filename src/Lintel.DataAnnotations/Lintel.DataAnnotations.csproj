@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Description>Conditional and comparison validation attributes (RequiredIf, GreaterThan, In, ...) for System.ComponentModel.DataAnnotations.</Description>
+    <PackageTags>$(PackageTags);validation;dataannotations;requiredif</PackageTags>
+    <!-- Attributes read the related property of the model by reflection, like DataAnnotations' Validator itself
+         (which is annotated RequiresUnreferencedCode). -->
+    <IsAotCompatible>false</IsAotCompatible>
+  </PropertyGroup>
+
+</Project>

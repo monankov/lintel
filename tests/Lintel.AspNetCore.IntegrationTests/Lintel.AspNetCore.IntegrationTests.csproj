@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="../Lintel.AspNetCore.TestWebApp/Lintel.AspNetCore.TestWebApp.csproj" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" />
+    <PackageReference Include="AngleSharp" />
+  </ItemGroup>
+
+</Project>

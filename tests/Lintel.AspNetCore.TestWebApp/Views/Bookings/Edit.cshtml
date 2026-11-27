@@ -1,0 +1,7 @@
+@model int
+<h1>Edit booking @Model</h1>
+
+<form id="edit" method="post" asp-action="Edit" asp-route-id="@Model">
+    <a id="back" asp-referrer="/bookings">Back</a>
+    <button type="submit">Save</button>
+</form>

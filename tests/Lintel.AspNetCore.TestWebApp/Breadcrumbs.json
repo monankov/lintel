@@ -1,0 +1,21 @@
+[
+  {
+    "Id": "home",
+    "Title": "Home",
+    "Controller": "Home",
+    "Action": "Index",
+    "Children": [
+      {
+        "Id": "bookings",
+        "Title": "Bookings",
+        "Controller": "Bookings",
+        "Action": "Index",
+        "Children": [
+          { "Id": "bookings-create", "Title": "New booking", "Controller": "Bookings", "Action": "Create" },
+          { "Id": "bookings-edit", "Title": "Edit <booking>", "Controller": "Bookings", "Action": "Edit", "PreservedRouteValues": [ "id" ] }
+        ]
+      },
+      { "Id": "reports", "Title": "Reports", "Page": "/Reports/Index" }
+    ]
+  }
+]

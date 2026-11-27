@@ -1,0 +1,46 @@
+<Solution>
+  <Folder Name="/docs/">
+    <File Path="docs/migration-from-structr.md" />
+  </Folder>
+  <Folder Name="/Solution Items/">
+    <File Path=".editorconfig" />
+    <File Path=".gitattributes" />
+    <File Path=".gitignore" />
+    <File Path="Directory.Build.props" />
+    <File Path="Directory.Packages.props" />
+    <File Path="global.json" />
+    <File Path="LICENSE" />
+    <File Path="README.md" />
+  </Folder>
+  <Folder Name="/assets/">
+    <File Path="assets/icon.png" />
+    <File Path="assets/icon.svg" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src/Lintel.AspNetCore/Lintel.AspNetCore.csproj" />
+    <Project Path="src/Lintel.DataAnnotations/Lintel.DataAnnotations.csproj" />
+    <Project Path="src/Lintel.Domain/Lintel.Domain.csproj" />
+    <Project Path="src/Lintel.EntityFrameworkCore/Lintel.EntityFrameworkCore.csproj" />
+    <Project Path="src/Lintel.Navigation/Lintel.Navigation.csproj" />
+    <Project Path="src/Lintel.Operations/Lintel.Operations.csproj" />
+    <Project Path="src/Lintel.Primitives/Lintel.Primitives.csproj" />
+    <Project Path="src/Lintel.Querying/Lintel.Querying.csproj" />
+    <Project Path="src/Lintel.Settings/Lintel.Settings.csproj" />
+    <Project Path="src/Lintel.Stateflows/Lintel.Stateflows.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Lintel.AspNetCore.IntegrationTests/Lintel.AspNetCore.IntegrationTests.csproj" />
+    <Project Path="tests/Lintel.AspNetCore.Tests/Lintel.AspNetCore.Tests.csproj" />
+    <Project Path="tests/Lintel.AspNetCore.TestWebApp/Lintel.AspNetCore.TestWebApp.csproj" />
+    <Project Path="tests/Lintel.DataAnnotations.Tests/Lintel.DataAnnotations.Tests.csproj" />
+    <Project Path="tests/Lintel.Domain.Tests/Lintel.Domain.Tests.csproj" />
+    <Project Path="tests/Lintel.EntityFrameworkCore.PostgreSql.Tests/Lintel.EntityFrameworkCore.PostgreSql.Tests.csproj" />
+    <Project Path="tests/Lintel.EntityFrameworkCore.Tests/Lintel.EntityFrameworkCore.Tests.csproj" />
+    <Project Path="tests/Lintel.Navigation.Tests/Lintel.Navigation.Tests.csproj" />
+    <Project Path="tests/Lintel.Operations.Tests/Lintel.Operations.Tests.csproj" />
+    <Project Path="tests/Lintel.Primitives.Tests/Lintel.Primitives.Tests.csproj" />
+    <Project Path="tests/Lintel.Querying.Tests/Lintel.Querying.Tests.csproj" />
+    <Project Path="tests/Lintel.Settings.Tests/Lintel.Settings.Tests.csproj" />
+    <Project Path="tests/Lintel.Stateflows.Tests/Lintel.Stateflows.Tests.csproj" />
+  </Folder>
+</Solution>

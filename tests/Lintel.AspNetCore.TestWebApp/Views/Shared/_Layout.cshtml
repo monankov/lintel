@@ -1,0 +1,41 @@
+@using Lintel.AspNetCore.Navigation
+@using Lintel.Navigation
+@inject IBreadcrumbNavigation<RouteBreadcrumb> Breadcrumbs
+@inject INavigation<MenuItem> SideMenu
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lintel test app</title>
+</head>
+<body>
+    <nav id="menu">
+        <a id="menu-home" asp-controller="Home" asp-action="Index" asp-match-class="active">Home</a>
+        <a id="menu-products" asp-controller="Products" asp-action="Index" asp-match-class="active">Products</a>
+        <a id="menu-bookings" asp-controller="Bookings" asp-action="Index" asp-match-class="active">Bookings</a>
+        <a id="menu-reports" asp-page="/Reports/Index" asp-match-class="active">Reports</a>
+    </nav>
+
+    <ul id="side-menu">
+        @foreach (var group in SideMenu)
+        {
+            <li id="@group.Id">
+                @group.Title
+                <ul>
+                    @foreach (var item in group.Children)
+                    {
+                        <li id="@item.Id" asp-append-if="item.IsActive" asp-append-class="active"><a href="@item.Url">@item.Title</a></li>
+                    }
+                </ul>
+            </li>
+        }
+    </ul>
+
+    <breadcrumbs id="breadcrumbs" asp-items="Breadcrumbs" />
+
+    <client-alerts id="alerts" />
+
+    <main>@RenderBody()</main>
+
+    <client-options id="client-options" />
+</body>
+</html>

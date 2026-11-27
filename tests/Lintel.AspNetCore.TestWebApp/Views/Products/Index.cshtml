@@ -1,0 +1,22 @@
+@model PagedList<Product>
+<h1>Products</h1>
+
+<page-size asp-options="new PageSizeOptions { ItemsPerPage = [5, 10, 0], DefaultPageSize = Model.PageSize }" />
+
+<table id="products">
+    <thead>
+        <tr>
+            <th id="sort-name" asp-sort="Name">Name <i class="icon-sort"></i></th>
+            <th id="sort-price" asp-sort="Price">Price &amp; tax</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model)
+        {
+            <partial name="_ProductRow" model="product" />
+        }
+    </tbody>
+</table>
+
+<page-info asp-options="new PageInfoOptions { PagedEnumerable = Model }" />
+<pagination asp-options="new PaginationOptions { PagedEnumerable = Model }" />

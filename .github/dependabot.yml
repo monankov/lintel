@@ -1,0 +1,29 @@
+version: 2
+updates:
+  - package-ecosystem: nuget
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      # EF Core, ASP.NET Core and Microsoft.Extensions are released together.
+      microsoft:
+        patterns:
+          - "Microsoft.*"
+      test-tools:
+        patterns:
+          - "xunit*"
+          - "AwesomeAssertions"
+          - "NSubstitute"
+          - "AngleSharp"
+          - "Testcontainers*"
+    ignore:
+      # Lintel targets .NET 10 (LTS): only patch and minor updates of the .NET 10 packages.
+      - dependency-name: "Microsoft.*"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "Npgsql.*"
+        update-types: ["version-update:semver-major"]
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly

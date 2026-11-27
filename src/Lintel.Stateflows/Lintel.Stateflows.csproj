@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Description>State machines for entities built on Stateless with dependency injection support.</Description>
+    <PackageTags>$(PackageTags);statemachine;stateless;workflow</PackageTags>
+    <!-- Configurations are found by assembly scanning. -->
+    <IsAotCompatible>false</IsAotCompatible>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
+    <PackageReference Include="Stateless" />
+  </ItemGroup>
+
+</Project>

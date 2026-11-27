@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <!-- An application that uses Lintel.AspNetCore the way real projects do, for the integration tests. -->
+
+  <PropertyGroup>
+    <!-- Not a package (IsPackable=false comes from tests/Directory.Build.props); the Web SDK warns when the solution is packed. -->
+    <WarnOnPackingNonPackableProject>false</WarnOnPackingNonPackableProject>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../../src/Lintel.AspNetCore/Lintel.AspNetCore.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,71 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+    tags: [ 'v*' ]
+  pull_request:
+
+env:
+  DOTNET_NOLOGO: true
+  DOTNET_CLI_TELEMETRY_OPTOUT: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # MinVer needs tags and history
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          global-json-file: global.json
+
+      - run: dotnet restore Lintel.slnx
+      - run: dotnet tool restore
+      - name: Check formatting (.editorconfig)
+        run: dotnet format whitespace Lintel.slnx --verify-no-changes --no-restore
+      - run: dotnet build Lintel.slnx -c Release --no-restore
+      - run: dotnet test --solution Lintel.slnx -c Release --no-build -p:CollectCoverage=true
+        env:
+          LINTEL_REQUIRE_DOCKER: true   # PostgreSQL integration tests must run, not be skipped
+
+      - name: Coverage report
+        if: always()
+        run: |
+          dotnet reportgenerator "-reports:TestResults/*.cobertura.xml" "-targetdir:TestResults/coverage" \
+            "-reporttypes:Html;JsonSummary;MarkdownSummaryGithub"
+          cat TestResults/coverage/SummaryGithub.md >> "$GITHUB_STEP_SUMMARY"
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: coverage
+          path: TestResults/coverage
+
+      # Fails the build when coverage drops below the thresholds (lines / branches, in %).
+      - name: Coverage thresholds
+        env:
+          MIN_LINE_COVERAGE: 95
+          MIN_BRANCH_COVERAGE: 85
+        run: |
+          line=$(jq '.summary.linecoverage' TestResults/coverage/Summary.json)
+          branch=$(jq '.summary.branchcoverage' TestResults/coverage/Summary.json)
+          echo "Line coverage: $line% (minimum $MIN_LINE_COVERAGE%), branch coverage: $branch% (minimum $MIN_BRANCH_COVERAGE%)"
+          jq -e --argjson line "$MIN_LINE_COVERAGE" --argjson branch "$MIN_BRANCH_COVERAGE" \
+            '.summary.linecoverage >= $line and .summary.branchcoverage >= $branch' TestResults/coverage/Summary.json > /dev/null
+
+      - run: dotnet pack Lintel.slnx -c Release --no-build -o artifacts
+      - uses: actions/upload-artifact@v4
+        with:
+          name: packages
+          path: artifacts/*
+
+      # A tag v* publishes the packages (and their .snupkg symbols) to NuGet.
+      # Requires the repository secret NUGET_API_KEY.
+      - name: Publish to NuGet
+        if: startsWith(github.ref, 'refs/tags/v')
+        run: dotnet nuget push "artifacts/*.nupkg" -k "$NUGET_API_KEY" -s https://api.nuget.org/v3/index.json --skip-duplicate
+        env:
+          NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}

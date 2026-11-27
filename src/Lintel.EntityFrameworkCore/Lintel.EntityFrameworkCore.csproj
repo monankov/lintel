@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Description>EF Core integration: auditing and soft-delete interceptors, entity and value object conventions, paging, sequential migration ids.</Description>
+    <IsAotCompatible>false</IsAotCompatible>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" />
+    <ProjectReference Include="..\Lintel.Domain\Lintel.Domain.csproj" />
+    <ProjectReference Include="..\Lintel.Querying\Lintel.Querying.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,21 @@
+@model BookingForm
+<h1>New booking</h1>
+
+<form id="booking" method="post" asp-action="Create">
+    <div asp-validation-summary="All" id="errors"></div>
+    <validation-summary id="summary" />
+    <validation-summary id="summary-all" include-property-errors="true" />
+    <label asp-for="Name">Your name</label>
+    <input asp-for="Name" />
+    <label asp-for="From"></label>
+    <input asp-for="From" asp-format="{0:dd.MM.yyyy}" />
+    <label asp-for="To" asp-required="true"></label>
+    <input asp-for="To" asp-format="{0:dd.MM.yyyy}" />
+    <span asp-validation-for="To"></span>
+    <input asp-for="HasPets" />
+    <label asp-for="HasPets" asp-required="false"></label>
+    <label asp-for="PetName"></label>
+    <input asp-for="PetName" />
+    <span asp-validation-for="PetName"></span>
+    <button type="submit">Save</button>
+</form>

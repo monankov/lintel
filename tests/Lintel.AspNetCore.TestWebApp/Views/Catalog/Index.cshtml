@@ -1,0 +1,3 @@
+@model PagedList<Product>
+<h1>Catalog</h1>
+<pagination asp-options="new PaginationOptions { PagedEnumerable = Model, MaximumPageNumbersToDisplay = null }" />

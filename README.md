@@ -10,25 +10,26 @@ domain base types, EF Core and ASP.NET Core integrations.
 Lintel is the successor of [Structr](https://github.com/askalione/Structr): only the parts that the modern
 .NET platform does not provide out of the box were carried over and rewritten for `net10.0`.
 
-> Status: **pre-release** — the packages are covered by tests but not yet published to NuGet.
+> Status: **0.x** — the packages are on NuGet and covered by tests, but the API may still change between
+> minor versions until 1.0.
 
 Each package has its own README with examples (the links in the table below). Moving a project from Structr:
 [docs/migration-from-structr.md](docs/migration-from-structr.md).
 
 ## Packages
 
-| Package | Purpose | Dependencies |
-|---|---|---|
-| [`Lintel.Operations`](src/Lintel.Operations/README.md) | Operations (commands/queries) with filter pipeline, notices (pub/sub) | — |
-| [`Lintel.Querying`](src/Lintel.Querying/README.md) | Specifications, `PagedList<T>`, dynamic sorting | — |
-| [`Lintel.Domain`](src/Lintel.Domain/README.md) | Entities, value objects, auditing and soft-delete contracts | — |
-| [`Lintel.Primitives`](src/Lintel.Primitives/README.md) | `TreeNode`, `HierarchyId`, sequential GUIDs, enum display helpers | — |
-| [`Lintel.EntityFrameworkCore`](src/Lintel.EntityFrameworkCore/README.md) | Auditing / soft-delete interceptors, conventions, paging, sequential migration ids | EF Core 10 (Relational), Domain, Querying |
-| [`Lintel.DataAnnotations`](src/Lintel.DataAnnotations/README.md) | `RequiredIf`, `GreaterThan`, `In` and other conditional attributes | — |
-| [`Lintel.AspNetCore`](src/Lintel.AspNetCore/README.md) | Paging, page size, sorting, form and badge tag helpers, rewrite rules, referrer, client alerts and options, route breadcrumbs and menus, localized validation messages, maintenance mode, security (proxy, allowed networks, failed attempts, headers) | ASP.NET Core, Querying, DataAnnotations, Navigation, Primitives |
-| [`Lintel.Settings`](src/Lintel.Settings/README.md) | Typed settings in JSON/XML files, writable at runtime, hot reload, encrypted properties | Data Protection abstractions |
-| [`Lintel.Stateflows`](src/Lintel.Stateflows/README.md) | Entity state machines on top of Stateless | Stateless |
-| [`Lintel.Navigation`](src/Lintel.Navigation/README.md) | Menu and breadcrumbs from JSON | — |
+| Package | NuGet | Purpose | Dependencies |
+|---|---|---|---|
+| [`Lintel.Operations`](src/Lintel.Operations/README.md) | [![NuGet](https://img.shields.io/nuget/v/Lintel.Operations.svg)](https://www.nuget.org/packages/Lintel.Operations) | Operations (commands/queries) with filter pipeline, notices (pub/sub) | — |
+| [`Lintel.Querying`](src/Lintel.Querying/README.md) | [![NuGet](https://img.shields.io/nuget/v/Lintel.Querying.svg)](https://www.nuget.org/packages/Lintel.Querying) | Specifications, `PagedList<T>`, dynamic sorting | — |
+| [`Lintel.Domain`](src/Lintel.Domain/README.md) | [![NuGet](https://img.shields.io/nuget/v/Lintel.Domain.svg)](https://www.nuget.org/packages/Lintel.Domain) | Entities, value objects, auditing and soft-delete contracts | — |
+| [`Lintel.Primitives`](src/Lintel.Primitives/README.md) | [![NuGet](https://img.shields.io/nuget/v/Lintel.Primitives.svg)](https://www.nuget.org/packages/Lintel.Primitives) | `TreeNode`, `HierarchyId`, sequential GUIDs, enum display helpers | — |
+| [`Lintel.EntityFrameworkCore`](src/Lintel.EntityFrameworkCore/README.md) | [![NuGet](https://img.shields.io/nuget/v/Lintel.EntityFrameworkCore.svg)](https://www.nuget.org/packages/Lintel.EntityFrameworkCore) | Auditing / soft-delete interceptors, conventions, paging, sequential migration ids | EF Core 10 (Relational), Domain, Querying |
+| [`Lintel.DataAnnotations`](src/Lintel.DataAnnotations/README.md) | [![NuGet](https://img.shields.io/nuget/v/Lintel.DataAnnotations.svg)](https://www.nuget.org/packages/Lintel.DataAnnotations) | `RequiredIf`, `GreaterThan`, `In` and other conditional attributes | — |
+| [`Lintel.AspNetCore`](src/Lintel.AspNetCore/README.md) | [![NuGet](https://img.shields.io/nuget/v/Lintel.AspNetCore.svg)](https://www.nuget.org/packages/Lintel.AspNetCore) | Paging, page size, sorting, form and badge tag helpers, rewrite rules, referrer, client alerts and options, route breadcrumbs and menus, localized validation messages, maintenance mode, security (proxy, allowed networks, failed attempts, headers) | ASP.NET Core, Querying, DataAnnotations, Navigation, Primitives |
+| [`Lintel.Settings`](src/Lintel.Settings/README.md) | [![NuGet](https://img.shields.io/nuget/v/Lintel.Settings.svg)](https://www.nuget.org/packages/Lintel.Settings) | Typed settings in JSON/XML files, writable at runtime, hot reload, encrypted properties | Data Protection abstractions |
+| [`Lintel.Stateflows`](src/Lintel.Stateflows/README.md) | [![NuGet](https://img.shields.io/nuget/v/Lintel.Stateflows.svg)](https://www.nuget.org/packages/Lintel.Stateflows) | Entity state machines on top of Stateless | Stateless |
+| [`Lintel.Navigation`](src/Lintel.Navigation/README.md) | [![NuGet](https://img.shields.io/nuget/v/Lintel.Navigation.svg)](https://www.nuget.org/packages/Lintel.Navigation) | Menu and breadcrumbs from JSON | — |
 
 The Dependencies column lists other packages. Packages with `Add...()` registration methods also depend on
 `Microsoft.Extensions.DependencyInjection.Abstractions`.

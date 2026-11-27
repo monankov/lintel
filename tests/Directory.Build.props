@@ -8,6 +8,12 @@
     <LintelIsTestProject>$(MSBuildProjectName.EndsWith('Tests'))</LintelIsTestProject>
   </PropertyGroup>
 
+  <!-- SonarQube Cloud: test projects are analyzed as tests; test applications are not analyzed. -->
+  <PropertyGroup>
+    <SonarQubeTestProject>$(LintelIsTestProject)</SonarQubeTestProject>
+    <SonarQubeExclude Condition="'$(LintelIsTestProject)' != 'true'">true</SonarQubeExclude>
+  </PropertyGroup>
+
   <PropertyGroup Condition="'$(LintelIsTestProject)' == 'true'">
     <IsTestProject>true</IsTestProject>
     <OutputType>Exe</OutputType>

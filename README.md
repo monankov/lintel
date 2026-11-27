@@ -4,6 +4,8 @@
 
 [![CI](https://github.com/monankov/lintel/actions/workflows/ci.yml/badge.svg)](https://github.com/monankov/lintel/actions/workflows/ci.yml)
 [![codecov](https://codecov.io/gh/monankov/lintel/graph/badge.svg)](https://codecov.io/gh/monankov/lintel)
+[![Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=monankov_lintel&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=monankov_lintel)
+[![Maintainability](https://sonarcloud.io/api/project_badges/measure?project=monankov_lintel&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=monankov_lintel)
 [![.NET 10](https://img.shields.io/badge/.NET-10-512BD4)](https://dotnet.microsoft.com/download/dotnet/10.0)
 [![License](https://img.shields.io/github/license/monankov/lintel)](LICENSE)
 

@@ -38,7 +38,7 @@ jobs:
             "-reporttypes:Html;JsonSummary;MarkdownSummaryGithub"
           cat TestResults/coverage/SummaryGithub.md >> "$GITHUB_STEP_SUMMARY"
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: always()
         with:
           name: coverage
@@ -57,7 +57,7 @@ jobs:
             '.summary.linecoverage >= $line and .summary.branchcoverage >= $branch' TestResults/coverage/Summary.json > /dev/null
 
       - run: dotnet pack Lintel.slnx -c Release --no-build -o artifacts
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: packages
           path: artifacts/*

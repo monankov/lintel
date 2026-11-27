@@ -27,6 +27,19 @@ public class PagedListTests
     }
 
     [Fact]
+    public void Is_a_covariant_IPagedList_that_keeps_metadata()
+    {
+        IPagedList<object> page = new PagedList<string>(["a", "b"], totalItems: 5, pageNumber: 2, pageSize: 2);
+
+        page.Should().Equal("a", "b");
+        page.Count.Should().Be(2);
+        page[1].Should().Be("b");
+        page.TotalItems.Should().Be(5);
+        page.PageNumber.Should().Be(2);
+        page.ToPagedResult().Items.Should().Equal("a", "b");
+    }
+
+    [Fact]
     public void Last_page_is_partially_filled()
     {
         var result = new PagedList<int>([10], totalItems: 10, pageNumber: 4, pageSize: 3);

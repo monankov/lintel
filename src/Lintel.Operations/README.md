@@ -81,6 +81,16 @@ public sealed class SendReceipt(IMailer mailer) : NoticeHandler<OrderPaid>
     protected override void Handle(OrderPaid notice) => mailer.SendReceipt(notice.OrderId);
 }
 
+// Asynchronous handler
+public sealed class SaveAuditEntry(AppDbContext db) : AsyncNoticeHandler<OrderPaid>
+{
+    public override async Task HandleAsync(OrderPaid notice, CancellationToken cancellationToken)
+    {
+        db.AuditEntries.Add(new AuditEntry($"Order {notice.OrderId} paid"));
+        await db.SaveChangesAsync(cancellationToken);
+    }
+}
+
 builder.Services.AddNotices(typeof(Program).Assembly);
 
 await publisher.PublishAsync(new OrderPaid { OrderId = 42 }, cancellationToken); // INoticePublisher

@@ -7,10 +7,10 @@ namespace Lintel.Collections;
 /// </summary>
 /// <remarks>
 /// A <see cref="PagedList{T}"/> serializes to JSON as a plain array. To keep the metadata,
-/// convert it with <see cref="PagedListExtensions.ToPagedResult{T}(PagedList{T})"/>.
+/// convert it with <see cref="PagedListExtensions.ToPagedResult{T}(IPagedList{T})"/>.
 /// </remarks>
 /// <typeparam name="T">The type of items.</typeparam>
-public class PagedList<T> : IPagedEnumerable, IReadOnlyList<T>
+public class PagedList<T> : IPagedList<T>
 {
     private readonly List<T> _items;
 

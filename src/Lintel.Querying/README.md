@@ -47,6 +47,9 @@ page.HasNextPage;
 page.FirstItemOnPage; // 21
 ```
 
+`PagedList<T>` implements `IPagedList<out T>`. Use the interface in view models and APIs: it is covariant, so an
+`IPagedList<OrderVm>` can be passed where an `IPagedList<object>` is expected, and the paging data is kept.
+
 `ToPagedList` works on `IEnumerable<T>` and `IQueryable<T>`. For EF Core use `ToPagedListAsync` from
 `Lintel.EntityFrameworkCore`. `Lintel.AspNetCore` has tag helpers that show the pages.
 

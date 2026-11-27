@@ -117,7 +117,7 @@ public static class PagedListExtensions
     /// <param name="source">The page.</param>
     /// <returns>The serializable page.</returns>
     /// <exception cref="ArgumentNullException">If <paramref name="source"/> is <see langword="null"/>.</exception>
-    public static PagedResult<T> ToPagedResult<T>(this PagedList<T> source)
+    public static PagedResult<T> ToPagedResult<T>(this IPagedList<T> source)
     {
         ArgumentNullException.ThrowIfNull(source);
 

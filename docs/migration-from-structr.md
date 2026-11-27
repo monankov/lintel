@@ -38,7 +38,8 @@ The other Structr packages are not moved. See [section 4](#4-what-is-not-moved) 
 
 ### Lintel.Operations
 
-- `AddOperations`, `AddNotices` and all interfaces keep their signatures.
+- `AddOperations`, `AddNotices`, all interfaces and the handler base classes (`OperationHandler`,
+  `AsyncOperationHandler`, `NoticeHandler`, `AsyncNoticeHandler`) keep their signatures.
 - New: `AddOperationFilter(typeof(MyFilter<,>))` checks the filter type and does not register it twice.
 - New options: `HandlerServiceLifetime` and `NoticeServiceOptions.PublishStrategy`
   (`SequentialNoticePublishStrategy` by default, or `ParallelNoticePublishStrategy`).
@@ -51,6 +52,7 @@ handler then ran two times).
 | Structr | Lintel |
 |---|---|
 | `SortOrder` from `Structr.Abstractions`; `OrderBy`/`ThenBy`/`PageBy` from `Structr.Abstractions.Extensions` | `using Lintel.Querying;` |
+| `IPagedList<T>`, `PagedList<T>` from `Structr.Collections` | the same names in `Lintel.Collections` |
 | `SerializablePagedList<T>` | `PagedResult<T>` (a record): `page.ToPagedResult()`, `result.ToPagedList()` |
 | `ToPagedList(IQueryable, ...)` from `Structr.EntityFrameworkCore` | `ToPagedList` in `Lintel.Collections`; `ToPagedListAsync` in `Lintel.EntityFrameworkCore` |
 | `Structr.Collections.Extensions.AutoMapper` (`MapTo`) | `page.Map(x => ...)` |

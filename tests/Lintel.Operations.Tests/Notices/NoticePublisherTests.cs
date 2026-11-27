@@ -30,6 +30,15 @@ public class NoticePublisherTests
         protected override void Handle(ConfirmationNotice notice) => journal.Entries.Enqueue($"ticket:{notice.Message}");
     }
 
+    public class MailConfirmationHandler(Journal journal) : AsyncNoticeHandler<ConfirmationNotice>
+    {
+        public override async Task HandleAsync(ConfirmationNotice notice, CancellationToken cancellationToken)
+        {
+            await Task.Yield();
+            journal.Entries.Enqueue($"mail:{notice.Message}");
+        }
+    }
+
     public class ThrowingNotice : INotice
     {
         public required string Title { get; init; }
@@ -61,7 +70,7 @@ public class NoticePublisherTests
 
         await publisher.PublishAsync(new ConfirmationNotice { Message = "Message" }, TestContext.Current.CancellationToken);
 
-        journal.Entries.Should().BeEquivalentTo(["push:Message", "ticket:Message"]);
+        journal.Entries.Should().BeEquivalentTo(["push:Message", "ticket:Message", "mail:Message"]);
     }
 
     [Fact]

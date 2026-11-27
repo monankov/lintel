@@ -27,3 +27,8 @@ updates:
     directory: /
     schedule:
       interval: weekly
+    groups:
+      # All action updates (including major ones) in one pull request.
+      actions:
+        patterns:
+          - "*"

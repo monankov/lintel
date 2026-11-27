@@ -17,11 +17,11 @@ jobs:
       contents: read
       id-token: write   # NuGet Trusted Publishing: GitHub issues a token that nuget.org exchanges for a temporary API key
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 0   # MinVer needs tags and history
 
-      - uses: actions/setup-dotnet@v4
+      - uses: actions/setup-dotnet@v6
         with:
           global-json-file: global.json
 
@@ -41,7 +41,7 @@ jobs:
             "-reporttypes:Html;JsonSummary;MarkdownSummaryGithub"
           cat TestResults/coverage/SummaryGithub.md >> "$GITHUB_STEP_SUMMARY"
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: always()
         with:
           name: coverage
@@ -60,7 +60,7 @@ jobs:
             '.summary.linecoverage >= $line and .summary.branchcoverage >= $branch' TestResults/coverage/Summary.json > /dev/null
 
       - run: dotnet pack Lintel.slnx -c Release --no-build -o artifacts
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: packages
           path: artifacts/*
